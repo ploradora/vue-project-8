@@ -3,33 +3,69 @@
     <div class="destination-content">
       <p><span>01</span> PICK YOUR DESTINATION</p>
       <div class="locations">
+        <!-- <div
+          v-show="currentIndex === index"
+          v-for="(location, index) in locations"
+          :key="index"
+          class="location"
+        > -->
         <div class="location">
-          <div class="location-image">
-            <img src="../assets/destination/image-moon.png" alt="" />
-          </div>
+          <destination-img
+            v-for="(image, index) in images"
+            :key="index"
+            :image="image"
+            :index="index"
+            :current-index="currentIndex"
+          ></destination-img>
           <div class="location-text">
             <div class="location-nav-buttons">
-              <button class="active" @click="locationTo('moon')">MOON</button>
-              <button @click="locationTo('mars')">MARS</button>
-              <button @click="locationTo('europa')">EUROPA</button>
-              <button @click="locationTo('titan')">TITAN</button>
+              <button
+                :class="{ active: currentIndex === 0 }"
+                @click="locationTo(0)"
+              >
+                MOON
+              </button>
+              <button
+                :class="{ active: currentIndex === 1 }"
+                @click="locationTo(1)"
+              >
+                MARS
+              </button>
+              <button
+                :class="{ active: currentIndex === 2 }"
+                @click="locationTo(2)"
+              >
+                EUROPA
+              </button>
+              <button
+                :class="{ active: currentIndex === 3 }"
+                @click="locationTo(3)"
+              >
+                TITAN
+              </button>
             </div>
-            <h2 class="name">MOON</h2>
+            <!-- <h2 class="name">{{ location.name }}</h2>
             <p class="description">
-              See our planet as you’ve never seen it before. A perfect relaxing
-              trip away to help regain perspective and come back refreshed.
-              While you’re there, take in some history by visiting the Luna 2
-              and Apollo 11 landing sites.
+              {{ location.description }}
             </p>
             <div class="info">
               <div class="distance-container">
                 <p class="info-header">AVG. DISTANCE</p>
-                <p class="distance">384,400 KM</p>
+                <p class="distance">{{ location.distance }}</p>
               </div>
               <div class="duration-container">
                 <p class="info-header">EST. TRAVEL TIME</p>
-                <p class="duration">3 DAYS</p>
+                <p class="duration">{{ location.time }}</p>
               </div>
+            </div> -->
+            <div class="destinations-container">
+              <destination-text
+                v-for="(location, index) in locations"
+                :key="index"
+                :location="location"
+                :current-index="currentIndex"
+                :index="index"
+              ></destination-text>
             </div>
           </div>
         </div>
@@ -39,13 +75,35 @@
 </template>
 
 <script>
+import DestinationText from "@/components/DestinationText.vue";
+import DestinationImg from "@/components/DestinationImg.vue";
 export default {
+  components: {
+    DestinationText,
+    DestinationImg,
+  },
   data() {
     return {
-      locations: [
+      images: [
         {
           img: require("../assets/destination/image-moon.png"),
           alt: "the moon",
+        },
+        {
+          img: require("../assets/destination/image-mars.png"),
+          alt: "mars",
+        },
+        {
+          img: require("../assets/destination/image-europa.png"),
+          alt: "europa moon",
+        },
+        {
+          img: require("../assets/destination/image-titan.png"),
+          alt: "titan moon",
+        },
+      ],
+      locations: [
+        {
           name: "MOON",
           description:
             "See our planet as you’ve never seen it before. A perfect relaxing trip away to help regain perspective and come back refreshed. While you’re there, take in some history by visiting the Luna 2 and Apollo 11 landing sites.",
@@ -53,8 +111,8 @@ export default {
           time: "3 DAYS",
         },
         {
-          img: require("../assets/destination/image-mars.png"),
-          alt: "mars",
+          //   img: require("../assets/destination/image-mars.png"),
+          //   alt: "mars",
           name: "MARS",
           description:
             "Don’t forget to pack your hiking boots. You’ll need them to tackle Olympus Mons, the tallest planetary mountain in our solar system. It’s two and a half times the size of Everest!",
@@ -62,8 +120,8 @@ export default {
           time: "9 MONTHS",
         },
         {
-          img: require("../assets/destination/image-europa.png"),
-          alt: "europa moon",
+          //   img: require("../assets/destination/image-europa.png"),
+          //   alt: "europa moon",
           name: "EUROPA",
           description:
             "The smallest of the four Galilean moons orbiting Jupiter, Europa is a winter lover’s dream. With an icy surface, it’s perfect for a bit of ice skating, curling, hockey, or simple relaxation in your snug wintery cabin.",
@@ -71,8 +129,8 @@ export default {
           time: "3 YEARS",
         },
         {
-          img: require("../assets/destination/image-titan.png"),
-          alt: "titan moon",
+          //   img: require("../assets/destination/image-titan.png"),
+          //   alt: "titan moon",
           name: "TITAN",
           description:
             "The only moon known to have a dense atmosphere other than Earth, Titan is a home away from home (just a few hundred degrees colder!). As a bonus, you get striking views of the Rings of Saturn.",
@@ -80,8 +138,13 @@ export default {
           time: "7 DAYS",
         },
       ],
-      currentLocation: "moon",
+      currentIndex: 0,
     };
+  },
+  methods: {
+    locationTo(clicked) {
+      this.currentIndex = clicked;
+    },
   },
 };
 </script>
@@ -121,15 +184,18 @@ export default {
     }
     .locations {
       .location {
-        .location-image {
-          margin-top: 35px;
-          margin-bottom: 35px;
-          width: 100%;
-          img {
-            width: 50%;
-          }
-        }
+        // .location-image {
+        //   margin-top: 35px;
+        //   margin-bottom: 35px;
+        //   width: 100%;
+        //   overflow: hidden;
+
+        //   img {
+        //     width: 50%;
+        //   }
+        // }
         .location-text {
+          overflow: hidden;
           .location-nav-buttons {
             margin: auto;
             margin-bottom: 20px;
@@ -145,11 +211,19 @@ export default {
               font-size: 14px;
               letter-spacing: 2.36px;
               color: rgba(208, 214, 249);
-              padding-bottom: 20px;
+              padding-bottom: 10px;
+              cursor: pointer;
+              &:hover {
+                transition: box-shadow 0.15s linear;
+                box-shadow: inset 0 -3px rgb(151, 151, 151);
+              }
             }
             .active {
               color: #fff;
               box-shadow: inset 0 -3px #fff;
+              &:hover {
+                box-shadow: inset 0 -3px #fff;
+              }
             }
           }
           .name {
@@ -158,8 +232,21 @@ export default {
             font-size: 56px;
             color: #fff;
           }
+          //   .main-text-enter-active,
+          //   .main-text-leave-active {
+          //     transition: all 0.2s ease-in-out;
+          //   }
+          //   .main-text-enter-from {
+          //     transform: translateX(-200px);
+          //     opacity: 0;
+          //   }
+          //   .main-text-leave-to {
+          //     transform: translateX(200px);
+          //     opacity: 1;
+          //   }
           .description {
             width: 85%;
+            max-width: 621px;
             margin: auto;
             margin-bottom: 30px;
             max-width: 573px;
@@ -192,6 +279,14 @@ export default {
             }
           }
         }
+        .destinations-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 390px;
+          //   overflow: hidden;
+          flex-basis: 50%;
+        }
       }
     }
   }
@@ -200,12 +295,132 @@ export default {
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
+    .destination-content {
+      padding-top: 130px;
+      padding-bottom: 40px;
+      > p {
+        text-align: start;
+        padding-left: 40px;
+        font-size: 20px;
+        letter-spacing: 3.38px;
+      }
+      .locations {
+        .location {
+          //   .location-image {
+          //     margin-top: 45px;
+          //     img {
+          //       max-width: 300px;
+          //     }
+          //   }
+          .location-text {
+            .location-nav-buttons {
+              max-width: 280px;
+              button {
+                font-size: 16px;
+                letter-spacing: 2.7px;
+              }
+            }
+            .name {
+              font-size: 80px;
+            }
+            .description {
+              width: 85%;
+              max-width: 563px;
+              line-height: 25px;
+              font-family: "Barlow", sans-serif;
+              font-size: 15px;
+              color: rgba(208, 214, 249);
+            }
+            .info {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .distance-container {
+                margin-bottom: unset;
+                margin-right: 100px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
   @include desktop {
     background: url("../assets/destination/background-destination-desktop.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    text-align: unset;
+    .destination-content {
+      padding-top: 160px;
+      padding-bottom: 30px;
+      > p {
+        text-align: start;
+        padding-left: 11%;
+        font-size: 28px;
+        letter-spacing: 4.72px;
+        margin-bottom: 50px;
+      }
+      .locations {
+        .location {
+          width: 90%;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          //   .location-image {
+          //     width: unset;
+          //     margin-top: unset;
+          //     margin-bottom: unset;
+          //     display: grid;
+          //     place-items: center;
+          //     max-width: 650px;
+          //     flex-basis: 50%;
+          //     img {
+          //       width: 70%;
+          //       max-width: 445px;
+          //     }
+          //   }
+          .location-text {
+            flex-basis: 50%;
+            max-width: 445px;
+            .location-nav-buttons {
+              margin: unset;
+              margin-bottom: 20px;
+              max-width: 280px;
+              button {
+                font-size: 16px;
+                letter-spacing: 2.7px;
+              }
+            }
+            .name {
+              font-size: 100px;
+            }
+            .description {
+              margin: unset;
+              width: unset;
+              margin-bottom: 30px;
+              max-width: 433px;
+              line-height: 32px;
+              font-family: "Barlow", sans-serif;
+              font-size: 18px;
+              color: rgba(208, 214, 249);
+            }
+            .info {
+              margin: unset;
+              width: unset;
+              display: flex;
+              align-items: center;
+              justify-content: start;
+              .distance-container {
+                margin-bottom: unset;
+                margin-right: 60px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>

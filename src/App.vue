@@ -258,11 +258,11 @@ nav {
         overflow: hidden;
         .nav-links {
           width: 80%;
-          max-width: 800px;
+          max-width: 900px;
           position: relative;
-          padding-left: 55px;
+          padding-left: 8%;
           padding-right: 70px;
-          justify-content: space-around;
+          justify-content: unset;
           background-color: rgba(43, 44, 44, 0.274);
           backdrop-filter: blur(10px);
           &::after {
@@ -277,6 +277,7 @@ nav {
           }
           a {
             padding: 40px 0;
+            margin-right: 50px;
             span {
               display: unset;
             }
