@@ -3,20 +3,17 @@
     <div class="destination-content">
       <p><span>01</span> PICK YOUR DESTINATION</p>
       <div class="locations">
-        <!-- <div
-          v-show="currentIndex === index"
-          v-for="(location, index) in locations"
-          :key="index"
-          class="location"
-        > -->
         <div class="location">
-          <destination-img
-            v-for="(image, index) in images"
-            :key="index"
-            :image="image"
-            :index="index"
-            :current-index="currentIndex"
-          ></destination-img>
+          <div class="location-item-image">
+            <destination-img
+              v-show="currentIndex === index"
+              v-for="(image, index) in images"
+              :key="image"
+              :image="image"
+              :index="index"
+              :current-index="currentIndex"
+            ></destination-img>
+          </div>
           <div class="location-text">
             <div class="location-nav-buttons">
               <button
@@ -44,20 +41,6 @@
                 TITAN
               </button>
             </div>
-            <!-- <h2 class="name">{{ location.name }}</h2>
-            <p class="description">
-              {{ location.description }}
-            </p>
-            <div class="info">
-              <div class="distance-container">
-                <p class="info-header">AVG. DISTANCE</p>
-                <p class="distance">{{ location.distance }}</p>
-              </div>
-              <div class="duration-container">
-                <p class="info-header">EST. TRAVEL TIME</p>
-                <p class="duration">{{ location.time }}</p>
-              </div>
-            </div> -->
             <div class="destinations-container">
               <destination-text
                 v-for="(location, index) in locations"
@@ -111,8 +94,6 @@ export default {
           time: "3 DAYS",
         },
         {
-          //   img: require("../assets/destination/image-mars.png"),
-          //   alt: "mars",
           name: "MARS",
           description:
             "Don’t forget to pack your hiking boots. You’ll need them to tackle Olympus Mons, the tallest planetary mountain in our solar system. It’s two and a half times the size of Everest!",
@@ -120,8 +101,6 @@ export default {
           time: "9 MONTHS",
         },
         {
-          //   img: require("../assets/destination/image-europa.png"),
-          //   alt: "europa moon",
           name: "EUROPA",
           description:
             "The smallest of the four Galilean moons orbiting Jupiter, Europa is a winter lover’s dream. With an icy surface, it’s perfect for a bit of ice skating, curling, hockey, or simple relaxation in your snug wintery cabin.",
@@ -129,8 +108,6 @@ export default {
           time: "3 YEARS",
         },
         {
-          //   img: require("../assets/destination/image-titan.png"),
-          //   alt: "titan moon",
           name: "TITAN",
           description:
             "The only moon known to have a dense atmosphere other than Earth, Titan is a home away from home (just a few hundred degrees colder!). As a bonus, you get striking views of the Rings of Saturn.",
@@ -184,16 +161,9 @@ export default {
     }
     .locations {
       .location {
-        // .location-image {
-        //   margin-top: 35px;
-        //   margin-bottom: 35px;
-        //   width: 100%;
-        //   overflow: hidden;
-
-        //   img {
-        //     width: 50%;
-        //   }
-        // }
+        .location-item-image {
+          //   overflow: hidden;
+        }
         .location-text {
           overflow: hidden;
           .location-nav-buttons {
@@ -226,64 +196,12 @@ export default {
               }
             }
           }
-          .name {
-            font-family: "Bellefair", serif;
-            font-weight: 100;
-            font-size: 56px;
-            color: #fff;
-          }
-          //   .main-text-enter-active,
-          //   .main-text-leave-active {
-          //     transition: all 0.2s ease-in-out;
-          //   }
-          //   .main-text-enter-from {
-          //     transform: translateX(-200px);
-          //     opacity: 0;
-          //   }
-          //   .main-text-leave-to {
-          //     transform: translateX(200px);
-          //     opacity: 1;
-          //   }
-          .description {
-            width: 85%;
-            max-width: 621px;
-            margin: auto;
-            margin-bottom: 30px;
-            max-width: 573px;
-            line-height: 25px;
-            font-family: "Barlow", sans-serif;
-            font-size: 15px;
-            color: rgba(208, 214, 249);
-          }
-          .info {
-            width: 90%;
-            margin: auto;
-            max-width: 573px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(56, 59, 75, 100%);
-            .info-header {
-              margin-bottom: 15px;
-              font-family: "Barlow Condensed", sans-serif;
-              font-size: 14px;
-              letter-spacing: 2.36px;
-              color: rgba(208, 214, 249);
-            }
-            .distance-container {
-              margin-bottom: 35px;
-            }
-            .distance,
-            .duration {
-              font-family: "Bellefair", serif;
-              font-size: 28px;
-              color: #fff;
-            }
-          }
         }
         .destinations-container {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 390px;
+          height: 450px;
           //   overflow: hidden;
           flex-basis: 50%;
         }
@@ -306,40 +224,21 @@ export default {
       }
       .locations {
         .location {
-          //   .location-image {
-          //     margin-top: 45px;
-          //     img {
-          //       max-width: 300px;
-          //     }
-          //   }
+          .location-item-image {
+            margin-bottom: 30px;
+          }
           .location-text {
             .location-nav-buttons {
+              margin-bottom: unset;
               max-width: 280px;
               button {
                 font-size: 16px;
                 letter-spacing: 2.7px;
               }
             }
-            .name {
-              font-size: 80px;
-            }
-            .description {
-              width: 85%;
-              max-width: 563px;
-              line-height: 25px;
-              font-family: "Barlow", sans-serif;
-              font-size: 15px;
-              color: rgba(208, 214, 249);
-            }
-            .info {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              .distance-container {
-                margin-bottom: unset;
-                margin-right: 100px;
-              }
-            }
+          }
+          .destinations-container {
+            height: 390px;
           }
         }
       }
@@ -368,19 +267,11 @@ export default {
           display: flex;
           align-items: center;
           justify-content: center;
-          //   .location-image {
-          //     width: unset;
-          //     margin-top: unset;
-          //     margin-bottom: unset;
-          //     display: grid;
-          //     place-items: center;
-          //     max-width: 650px;
-          //     flex-basis: 50%;
-          //     img {
-          //       width: 70%;
-          //       max-width: 445px;
-          //     }
-          //   }
+          .location-item-image {
+            margin-bottom: unset;
+            padding-right: 50px;
+            flex-basis: 42%;
+          }
           .location-text {
             flex-basis: 50%;
             max-width: 445px;
@@ -393,29 +284,8 @@ export default {
                 letter-spacing: 2.7px;
               }
             }
-            .name {
-              font-size: 100px;
-            }
-            .description {
-              margin: unset;
-              width: unset;
-              margin-bottom: 30px;
-              max-width: 433px;
-              line-height: 32px;
-              font-family: "Barlow", sans-serif;
-              font-size: 18px;
-              color: rgba(208, 214, 249);
-            }
-            .info {
-              margin: unset;
-              width: unset;
-              display: flex;
-              align-items: center;
-              justify-content: start;
-              .distance-container {
-                margin-bottom: unset;
-                margin-right: 60px;
-              }
+            .destinations-container {
+              flex-basis: 50%;
             }
           }
         }

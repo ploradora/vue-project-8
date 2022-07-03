@@ -1,39 +1,16 @@
 <template>
-  <transition name="image-slide">
+  <transition name="img">
     <div class="location-image">
-      <img
-        v-show="currentIndex === index"
-        :src="image.img"
-        :alt="image.alt"
-      />
+      <img v-show="currentIndex === index" :src="image.img" :alt="image.alt" />
     </div>
   </transition>
 </template>
 
 <script>
 export default {
-  props: ["currentIndex", 'image', 'index'],
+  props: ["currentIndex", "image", "index"],
   data() {
-    return {
-    //   images: [
-    //     {
-    //       img: require("../assets/destination/image-moon.png"),
-    //       alt: "the moon",
-    //     },
-    //     {
-    //       img: require("../assets/destination/image-mars.png"),
-    //       alt: "mars",
-    //     },
-    //     {
-    //       img: require("../assets/destination/image-europa.png"),
-    //       alt: "europa moon",
-    //     },
-    //     {
-    //       img: require("../assets/destination/image-titan.png"),
-    //       alt: "titan moon",
-    //     },
-    //   ],
-    };
+    return {};
   },
 };
 </script>
@@ -49,41 +26,41 @@ export default {
     @content;
   }
 }
-.image-slide-enter-active {
-  transition: all 0.2s linear;
+.img-enter-active {
+  transition: all 0.5s ease-out;
 }
-
-.image-slide-leave-active {
+.img-leave-active {
   transition: unset;
 }
-.image-slide-enter-from {
+.img-enter-from {
   opacity: 0;
-  transform: translateX(-400px);
+  transform: translateX(-50px);
 }
-.image-slide-enter-to {
+.img-enter-to {
   opacity: 1;
   transform: translateX(0);
 }
-.image-slide-leave-from {
+.img-leave-from {
   opacity: 0;
+  transform: translateX(0);
 }
-.image-slide-leave-to {
+.img-leave-to {
   opacity: 0;
-  transform: translateX(400px);
+  transform: unset;
 }
 .location-image {
-  margin-top: 35px;
-  margin-bottom: 35px;
-  width: 100%;
-  height: fit-content;
+  width: 50%;
   overflow: hidden;
-
   img {
-    width: 50%;
+    width: 100%;
+    margin-top: 35px;
+    margin-bottom: 35px;
   }
   @include tablet {
-    margin-top: 45px;
+    max-width: 300px;
     img {
+      width: 100%;
+      margin-top: 25px;
       max-width: 300px;
     }
   }
@@ -91,12 +68,12 @@ export default {
     width: unset;
     margin-top: unset;
     margin-bottom: unset;
-    display: grid;
-    place-items: center;
-    max-width: 650px;
-    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    max-width: unset;
     img {
-      width: 70%;
+      margin: unset;
+      width: 100%;
       max-width: 445px;
     }
   }

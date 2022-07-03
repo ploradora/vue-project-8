@@ -37,28 +37,27 @@ export default {
   }
 }
 .description-text-enter-active {
-  transition: all 0.4s linear;
+  transition: all 0.5s ease-out;
 }
 
-
 .description-text-leave-active {
-    transition: unset;
+  transition: unset;
 }
 
 .description-text-enter-from {
   opacity: 0;
-  transform: translateX(200px);
+  transform: translateY(-40px);
 }
 .description-text-enter-to {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 .description-text-leave-from {
-    opacity: 0;
+  opacity: 0;
 }
 .description-text-leave-to {
   opacity: 0;
-  transform: translateX(-500px);
+  transform: unset;
 }
 .text-content {
   .name {
@@ -143,7 +142,7 @@ export default {
       margin: unset;
       width: unset;
       margin-bottom: 30px;
-      max-width: 433px;
+      max-width: unset;
       line-height: 32px;
       font-family: "Barlow", sans-serif;
       font-size: 18px;
