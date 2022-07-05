@@ -110,13 +110,13 @@ export default {
     window.addEventListener("keydown", (e) => {
       const slide = e.code;
       if (slide === "ArrowRight") {
-        if (this.currentMember === 3) {
+        if (this.crew.length - 1 <= this.currentMember) {
           this.currentMember = -1;
         }
         this.currentMember++;
       }
       if (slide === "ArrowLeft") {
-        if (this.currentMember === 0) {
+        if (this.currentMember <= 0) {
           this.currentMember = this.crew.length;
         }
         this.currentMember--;
@@ -193,6 +193,7 @@ export default {
             background-color: rgba(151, 151, 151, 0.25);
             cursor: pointer;
             &:hover {
+              transition: background-color 0.15s linear;
               background-color: rgba(151, 151, 151, 100%);
             }
           }
@@ -208,7 +209,7 @@ export default {
         margin-top: 50px;
         margin-bottom: 30px;
         width: 100%;
-        height: 40vh;
+        height: 42vh;
         display: flex;
         align-items: flex-end;
         border-bottom: 1px solid rgb(94, 94, 94);
@@ -236,8 +237,7 @@ export default {
         .crew-member {
           flex-direction: column;
           .about-container {
-            margin-top: 50px;
-            margin-bottom: 20px;
+            margin-top: 35px;
             height: 200px;
             max-width: 590px;
           }
@@ -246,6 +246,7 @@ export default {
           }
         }
         .image-container {
+          margin-top: unset;
           margin-bottom: unset;
           border-bottom: unset;
           position: absolute;

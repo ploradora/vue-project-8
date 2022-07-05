@@ -74,7 +74,7 @@ export default {
     img {
       margin: unset;
       width: 100%;
-      max-width: 445px;
+      max-width: 440px;
     }
   }
 }

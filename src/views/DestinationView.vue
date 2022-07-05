@@ -118,6 +118,23 @@ export default {
       currentIndex: 0,
     };
   },
+  mounted() {
+    window.addEventListener("keydown", (e) => {
+      const slide = e.code;
+      if (slide === "ArrowRight") {
+        if (this.locations.length - 1 <= this.currentIndex) {
+          this.currentIndex = -1;
+        }
+        this.currentIndex++;
+      }
+      if (slide === "ArrowLeft") {
+        if (this.currentIndex <= 0) {
+          this.currentIndex = this.locations.length;
+        }
+        this.currentIndex--;
+      }
+    });
+  },
   methods: {
     locationTo(clicked) {
       this.currentIndex = clicked;
@@ -162,10 +179,9 @@ export default {
     .locations {
       .location {
         .location-item-image {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          //   overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .location-text {
           overflow: hidden;
