@@ -1,7 +1,7 @@
 <template>
   <transition name="img">
     <div class="location-image">
-      <img v-show="currentIndex === index" :src="image.img" :alt="image.alt" />
+      <img :src="image.img" :alt="image.alt" />
     </div>
   </transition>
 </template>

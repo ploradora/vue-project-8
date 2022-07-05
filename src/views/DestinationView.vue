@@ -162,6 +162,9 @@ export default {
     .locations {
       .location {
         .location-item-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
           //   overflow: hidden;
         }
         .location-text {
